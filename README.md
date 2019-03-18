@@ -38,3 +38,13 @@ Final MP4 video will include only presentation, audio and screenshare (no chat w
 
 Link to download MP4 file will look like this: https://yourBBBserverURL/download/presentation/{meetingID}/{meetingID}.mp4
 If your BigBlueButton server is connected to https://createwebinar.com contol panel, all webinar participants will be able to download the recorded webinars from the website in one click.
+
+## Errors
+if error if file log /var/log/bigbluebutton/download/{meeting_id}.log
+``
+/opt/ffmpeg/ffmpeg: error while loading shared libraries: libfdk-aac.so.0: cannot open shared object file: No such file or directory
+``
+run
+```
+ln -s /usr/lib/x86_64-linux-gnu/libfdk-aac.so /usr/lib/x86_64-linux-gnu/libfdk-aac.so.0
+```
