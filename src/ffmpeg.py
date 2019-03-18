@@ -94,7 +94,8 @@ def trim_audio(audio_file, start, end, out_file):
     command = '%s -ss %s -t %s -i %s %s 2>> %s' % (FFMPEG, str1, str2, audio_file, temp_file, logfile)
     os.system(command)
     mp3_to_aac(temp_file, out_file)
-    os.remove(temp_file)
+    if os.path.exists(temp_file):
+        os.remove(temp_file)
 
 
 def trim_audio_start(dictionary, length, full_audio, audio_trimmed):
