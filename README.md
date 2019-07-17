@@ -13,7 +13,7 @@ Final MP4 video will include only presentation, audio and screenshare (no chat w
 
 ## Installation (need to be root)
 ```
-git clone https://github.com/createwebinar/bbb-download.git
+git clone https://github.com/vova-zush/bbb-download.git
 cd bbb-download
 chmod u+x install.sh 
 sudo ./install.sh
