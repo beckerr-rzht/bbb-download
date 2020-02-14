@@ -28,7 +28,8 @@ LOGS = '/var/log/bigbluebutton/download/'
 source_dir = PATH + meetingId + "/"
 temp_dir = source_dir + 'temp/'
 target_dir = source_dir + 'download/'
-audio_path = 'audio/'
+#audio_path = 'audio/'
+audio_path = temp_dir + 'audio/'
 events_file = 'shapes.svg'
 LOGFILE = LOGS + meetingId + '.log'
 ffmpeg.set_logfile(LOGFILE)
@@ -175,9 +176,9 @@ def prepare(bbb_version):
 
     if not os.path.exists('audio'):
         global audio_path
-        audio_path = temp_dir + 'audio/'
+        #audio_path = temp_dir + 'audio/'
         os.mkdir(audio_path)
-        ffmpeg.extract_audio_from_video('video/webcams.webm', audio_path + 'audio.ogg')
+        ffmpeg.extract_audio_from_video(source_dir + 'video/webcams.webm', audio_path + 'audio.ogg')
 
     shutil.copytree("presentation", temp_dir + "presentation")
     dictionary, length = extract_timings(bbb_version)

@@ -4,8 +4,8 @@ __author__ = 'CreateWebinar.com'
 import os
 import shutil
 
-# FFMPEG = 'ffmpeg'
-FFMPEG = '/opt/ffmpeg/ffmpeg'
+FFMPEG = 'ffmpeg'
+#FFMPEG = '/opt/ffmpeg/ffmpeg'
 # FFMPEG = '/root/bin/ffmpeg'
 VID_ENCODER = 'libx264'
 
@@ -94,8 +94,7 @@ def trim_audio(audio_file, start, end, out_file):
     command = '%s -ss %s -t %s -i %s %s 2>> %s' % (FFMPEG, str1, str2, audio_file, temp_file, logfile)
     os.system(command)
     mp3_to_aac(temp_file, out_file)
-    if os.path.exists(temp_file):
-        os.remove(temp_file)
+    os.remove(temp_file)
 
 
 def trim_audio_start(dictionary, length, full_audio, audio_trimmed):
@@ -111,7 +110,7 @@ def trim_video_start(dictionary, length, full_vid, video_trimmed):
 
 
 def mp3_to_aac(mp3_file, aac_file):
-    command = '%s -i %s -c:a libfdk_aac %s 2>> %s' % (FFMPEG, mp3_file, aac_file, logfile)
+    command = '%s -i %s -c:a aac %s 2>> %s' % (FFMPEG, mp3_file, aac_file, logfile)
     os.system(command)
 
 
@@ -121,6 +120,6 @@ def webm_to_mp4(webm_file, mp4_file):
 
 
 def audio_to_video(audio_file, image_file, video_file):
-    command = '%s -loop 1 -i %s -i %s -c:v libx264 -tune stillimage -c:a libfdk_aac -pix_fmt yuv420p -shortest %s' % (
+    command = '%s -loop 1 -i %s -i %s -c:v libx264 -tune stillimage -c:a aac -pix_fmt yuv420p -shortest %s' % (
     FFMPEG, image_file, audio_file, video_file)
     os.system(command)
