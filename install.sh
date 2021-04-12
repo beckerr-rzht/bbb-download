@@ -45,8 +45,12 @@ mkdir -p /var/log/bigbluebutton/download
 chown -R bigbluebutton:bigbluebutton /var/log/bigbluebutton/download
 chmod -R ugo+rwx /var/log/bigbluebutton/download/
 
-echo "Coping ruby script that make mp4 files"
-cp src/*.rb /usr/local/bigbluebutton/core/scripts/post_publish
+echo "Coping ruby script"
+if [[ $(lsb_release -rs) == "18.04" ]]; then
+cp src/python_executer.rb /usr/local/bigbluebutton/core/scripts/post_publish
+elif [[ $(lsb_release -rs) == "16.04" ]]; then
+cp src/python_executer16.rb /usr/local/bigbluebutton/core/scripts/post_publish
+fi
 
 echo "Coping python scripts to post_publish directory"
 cp src/*.py /usr/local/bigbluebutton/core/scripts/post_publish
