@@ -43,11 +43,12 @@ chmod 0755 /var/bigbluebutton/published/presentation
 echo "Creating log directory"
 mkdir -p /var/log/bigbluebutton/download
 chown -R bigbluebutton:bigbluebutton /var/log/bigbluebutton/download
-chmod -R ugo+rw /var/log/bigbluebutton/download/
+chmod -R ugo+rwx /var/log/bigbluebutton/download/
 
 echo "Coping ruby script that make mp4 files"
 cp src/*.rb /usr/local/bigbluebutton/core/scripts/post_publish
 
 echo "Coping python scripts to post_publish directory"
 cp src/*.py /usr/local/bigbluebutton/core/scripts/post_publish
-
+echo "Set permisions"
+sudo chmod -R 755 /usr/local/bigbluebutton/core/scripts/post_publish/
