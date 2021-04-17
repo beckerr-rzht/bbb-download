@@ -1,5 +1,7 @@
 #!/bin/bash
 
+scriptDir=$(dirname -- "$(readlink -f -- "$BASH_SOURCE")")
+
 echo "Check if we are root"
 uid=$(id -u)
 if [ $uid -ne 0 ]
@@ -30,7 +32,7 @@ fi
 
 echo "Copy ffmpeg to /opt/ffmpeg folder"
 mkdir -p /opt/ffmpeg
-cp ffmpeg/* /opt/ffmpeg
+cp $scriptDir/ffmpeg/* /opt/ffmpeg
 chmod 755 /opt/ffmpeg/ffmpeg
 chmod 755 /usr/local/bigbluebutton/core/scripts/post_publish/*
 
@@ -47,12 +49,12 @@ chmod -R ugo+rwx /var/log/bigbluebutton/download/
 
 echo "Coping ruby script"
 if [[ $(lsb_release -rs) == "18.04" ]]; then
-cp src/python_executer.rb /usr/local/bigbluebutton/core/scripts/post_publish
+cp $scriptDir/src/python_executer.rb /usr/local/bigbluebutton/core/scripts/post_publish
 elif [[ $(lsb_release -rs) == "16.04" ]]; then
-cp src/python_executer16.rb /usr/local/bigbluebutton/core/scripts/post_publish
+cp $scriptDir/src/python_executer16.rb /usr/local/bigbluebutton/core/scripts/post_publish
 fi
 
 echo "Coping python scripts to post_publish directory"
-cp src/*.py /usr/local/bigbluebutton/core/scripts/post_publish
+cp $scriptDir/src/*.py /usr/local/bigbluebutton/core/scripts/post_publish
 echo "Set permisions"
 sudo chmod -R 755 /usr/local/bigbluebutton/core/scripts/post_publish/
