@@ -58,3 +58,4 @@ echo "Coping python scripts to post_publish directory"
 cp $scriptDir/src/*.py /usr/local/bigbluebutton/core/scripts/post_publish
 echo "Set permisions"
 sudo chmod -R 755 /usr/local/bigbluebutton/core/scripts/post_publish/
+echo "Done."
